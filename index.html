@@ -7,8 +7,8 @@
 <script>
 $(document).ready(function() {
     $( "#SearchButton" ).click(function(e) {
-    var myurl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&outputsize=full&apikey=F9WUXLRGSGBITBME";
-    
+    var myurl = "https://marketdata.websol.barchart.com/getHistory.json?apikey=8127ff64a488d7aa295cca6fb2b73de9&symbol=aapl&type=daily&startDate=20160608000000";
+    //can change aapl to IBM or another company
    e.preventDefault();
    console.log(myurl);
   
@@ -16,9 +16,17 @@ $(document).ready(function() {
   $.ajax({
       url:myurl,
       dataType:"json",
+       type: 'GET',
+      crossDomain: true,
         success: function(parsed_json) {
             console.log(parsed_json);
             
+            var x = parsed_json.results[parsed_json.results.length-1].high;
+            
+            console.log(x);
+        },
+        error: function(e) {
+            console.error(e);
         }
     //     var everything = "<ul>";
     //   var myArray = parsed_json["items"];
