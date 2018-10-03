@@ -104,7 +104,7 @@
                     var stockHigh = parsed_json.results[parsed_json.results.length - 1].high;
                     var openPrice = parsed_json.results[parsed_json.results.length - 1].open;
                     var difference = stockHigh - openPrice;
-                    difference = -1;
+    
                     if (difference > 0) {
                        var everything = "<p class=\"increase\"> " +  "Stock High " + stockHigh + "<br>" +  "difference " + difference + "</p>"; 
                     }
