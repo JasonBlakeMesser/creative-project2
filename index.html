@@ -78,9 +78,19 @@
         font: bold;
         color: red;
     }
-    h3 {
+    .stock {
+        font-size: 24px;
+        font: bold;
         color: white;
     }
+    h1 {
+        color: white;
+    }
+    .center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
 </style>
 <script>
     $(document).ready(function() {
@@ -103,24 +113,19 @@
 
                     var stockHigh = parsed_json.results[parsed_json.results.length - 1].high;
                     var openPrice = parsed_json.results[parsed_json.results.length - 1].open;
-                    var difference = stockHigh - openPrice;
-    
+                    var stockClose = parsed_json.results[parsed_json.results.length - 1].close;
+                    var difference = stockClose - openPrice;
+                    difference = Math.round(difference * 100) / 100;
+                    var everything = "<p class=\"stock\">Stock High today: $" + stockHigh + "</p>";
                     if (difference > 0) {
-                       var everything = "<p class=\"increase\"> " +  "Stock High " + stockHigh + "<br>" +  "difference " + difference + "</p>"; 
+                       everything += "<p class=\"increase\">&#9650;" + difference + "</p>"; 
                     }
                     else {
-                        var everything = "<p class=\"decrease\"> " +  "Stock High " + stockHigh + "<br>" +  "difference " + difference + "</p>";
+                        everything += "<p class=\"decrease\">&#9660;" + difference + "</p>";
                     }
                     $("#output").html(everything);
 
-                    if (difference > 0) {
-                        //output difference green
-                    }
-                    else {
-                        //output difference red
-                    }
-                    console.log(difference);
-
+                    
 
                 },
                 error: function(e) {
@@ -148,10 +153,10 @@
 
 </form>
 </div>
-<div id="search" class="column">
+<div id="search" class="center">
     <form autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px">
-            <h3>Search Stocks: </h3>
+            <h1>Search Stocks in the S&P 500: </h1>
             
             <input type="text" id="searchField" value="">
         <input id="myInput" type="submit" value="Submit">
